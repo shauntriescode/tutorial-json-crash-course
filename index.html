@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Crash Course</title>
+  </head>
+  <body>
+    <ul id="people"></ul>
+    <script>
+      /*
+      // Objects are a collection of key/value pairs - to organize and structure data
+      let person = {
+        name: "John",
+        age: 35,
+        // Object within an object
+        address: {
+          street: "5 main st",
+          city: "London",
+        },
+        children: ["Briana", "Nicholas"],
+      };
+
+      // Turns a variable into JSON Object into JSON string
+      // person = JSON.stringify(person);
+      // Turns a variable back into Object from JSON string
+      // person = JSON.parse(person);
+
+      let people = [
+        {
+          name: "Shaun",
+          age: 27,
+        },
+        {
+          name: "Brad",
+          age: 35,
+        },
+        {
+          name: "Sarah",
+          age: 25,
+        },
+      ];
+
+      // console.log(people[1].age);
+      let output = "";
+
+      for (let i = 0; i < people.length; i++) {
+        // console.log(people[i].name);
+        output += "<li>" + people[i].name + "</li>";
+      }
+
+      document.getElementById("people").innerHTML = output;
+      */
+
+      let xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let response = JSON.parse(xhttp.responseText);
+          let people = response.people;
+          let output = "";
+
+          for (let i = 0; i < people.length; i++) {
+            output += "<li>" + people[i].name + "</li>";
+          }
+
+          document.getElementById("people").innerHTML = output;
+        }
+      };
+      xhttp.open("GET", "people.json", true);
+      xhttp.send();
+    </script>
+  </body>
+</html>
